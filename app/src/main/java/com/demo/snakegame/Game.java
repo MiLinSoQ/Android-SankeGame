@@ -118,14 +118,16 @@ class Game {
    
    private void UpdateRole() {
       if (mSnake == null) return;
-      
+      Log.d(TAG, "autorun: " + isAutorun());
       if (isAutorun()) {
+         
          mSnake.forwardTo(mFood.getX(), mFood.getY());
       } else {
          mSnake.forward();
       }
       
       if (mSnake.isEatingSelf()) {
+         Log.d(TAG, "Game stop: " + mSnake.toString());
          mGameTask.interrupt();
       }
    

@@ -122,11 +122,11 @@ public class HandleController extends ConstraintLayout {
    };
    
    public interface ActionControllerListener {
-      void onUp();
-      void onDown();
-      void onLeft();
-      void onRight();
-      void onCenter();
+      boolean onUp();
+      boolean onDown();
+      boolean onLeft();
+      boolean onRight();
+      boolean onCenter();
    }
    
 }

@@ -68,8 +68,10 @@ class BaseRole {
       return forwardFactor;
    }
    
-   public void setDirection(MoveDirection direction) {
+   public boolean setDirection(MoveDirection direction) {
+      if (this.direction == direction) return false;
       this.direction = direction;
+      return true;
    }
    
    public void setPosition(int x, int y) {

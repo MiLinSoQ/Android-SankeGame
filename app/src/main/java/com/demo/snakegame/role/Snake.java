@@ -1,5 +1,7 @@
 package com.demo.snakegame.role;
 
+import android.util.Log;
+
 import com.demo.snakegame.HandleController;
 import java.util.LinkedList;
 
@@ -124,45 +126,51 @@ public class Snake extends BaseRole implements ForwardInterface , HandleControll
    
    @Override
    public void forwardTo(int x, int y) {
-      this.forward();
+      
       if (this.x > x) {
-         setDirection(MoveDirection.LEFT);
+         onLeft();
       } else if (this.x < x) {
-         setDirection(MoveDirection.RIGHT);
+         onRight();
       } else if (this.y < y) {
-         setDirection(MoveDirection.DOWN);
+         onDown();
       } else if (this.y > y) {
-         setDirection(MoveDirection.UP);
+         onUp();
       }
+      this.forward();
    }
    
    @Override
-   public void onUp() {
-      if (this.getSize() > 1 && this.direction == MoveDirection.DOWN) return;
-      setDirection(MoveDirection.UP);
+   public boolean onUp() {
+      if (this.getSize() > 1 && this.direction == MoveDirection.DOWN) return false;
+      Log.d(TAG, "on up");
+      return setDirection(MoveDirection.UP);
    }
    
    @Override
-   public void onDown() {
-      if (this.getSize() > 1 && this.direction == MoveDirection.UP) return;
-      setDirection(MoveDirection.DOWN);
+   public boolean onDown() {
+      if (this.getSize() > 1 && this.direction == MoveDirection.UP) return false;
+      Log.d(TAG, "on down");
+      return setDirection(MoveDirection.DOWN);
    }
    
    @Override
-   public void onLeft() {
-      if (this.getSize() > 1 && this.direction == MoveDirection.RIGHT) return;
-      setDirection(MoveDirection.LEFT);
+   public boolean onLeft() {
+      if (this.getSize() > 1 && this.direction == MoveDirection.RIGHT) return false;
+      Log.d(TAG, "on left");
+      return setDirection(MoveDirection.LEFT);
    }
    
    @Override
-   public void onRight() {
-      if (this.getSize() > 1 && this.direction == MoveDirection.LEFT) return;
-      setDirection(MoveDirection.RIGHT);
+   public boolean onRight() {
+      if (this.getSize() > 1 && this.direction == MoveDirection.LEFT) return false;
+      Log.d(TAG, "on right");
+      return setDirection(MoveDirection.RIGHT);
    }
    
    @Override
-   public void onCenter() {
+   public boolean onCenter() {
       setAutorun(!this.isAutorun);
+      return true;
    }
    public static class SnakeBody extends BaseRole {
       public SnakeBody(int x, int y) {
